@@ -24,6 +24,15 @@ public:
             string s;
             getline (this->file,this->first_line);
         }
+        if (acc.compare("write")==0){
+            this->count = 7;
+            this->byte = 0;
+        }
+        else if (acc.compare("read")==0){
+            this->count = -1;
+            this->byte = 0;
+        }
+        
         
     }
     
@@ -31,7 +40,7 @@ public:
 
     int readBit(){
         if (this->access.compare("read")!=0){
-            cout << "Não foi possivel ler bit porque o acesso ao ficheiro foi de escrita\n";
+            cout << "Não foi possivel ler o bit porque o acesso ao ficheiro foi de escrita\n";
             return NULL;
         }
 
@@ -40,7 +49,7 @@ public:
             this->file.read(&(c),1);
             this->byte = reinterpret_cast<unsigned char&>(c);
             
-            if (!this->byte){
+            if (!this->file.good()){
                 cout << "Ficheiro já foi completamente lido.\n";
                 this->file.close();
                 return NULL;
@@ -53,8 +62,56 @@ public:
         this->count -= 1;
 
         return bit;
-
     }
+
+    void writeBit(int bit){
+        if (this->access.compare("write")!=0){
+            cout << "Não foi possivel escrever o bit porque o acesso ao ficheiro foi de leitura\n";
+            return;
+        }
+
+        if ((this->count) < 0){
+
+            char c = reinterpret_cast<char&>(this->byte);
+            //this->file.write(&(c),1);
+            this->file << this->byte;
+            this->byte = 0;
+            this->count = 7;
+        }
+
+        this->byte = this->byte | (bit << this->count);
+        this->count --;
+    }
+
+    void endWrite(){
+        if (this->access.compare("write")!=0){
+            cout << "Não foi possivel escrever o bit porque o acesso ao ficheiro foi de leitura\n";
+            return;
+        }
+        
+        if (this->count!=7){
+            char c = reinterpret_cast<char&>(this->byte);
+            this->file << this->byte;
+        }
+        this->file.close();
+
+        cout << "Escrita de bits finalizada.\n";
+    }
+
+    int* readBits(int n){
+
+
+        int * arr = new int [n];
+
+        for (int i=0; i<n; i++){
+            arr[i] =  this->readBit();
+        }
+
+        return arr;
+    }
+
+
+
 
 };
 
