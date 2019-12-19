@@ -3,6 +3,7 @@
 #include <fstream> 
 #include "Bitstream.h"
 #include <math.h>
+#include <vector>
 using namespace std;
 
 class Golomb
@@ -68,33 +69,24 @@ public:
         }
     }
 
-    int decode(int * n){
+    int decode(vector<int> n){
         int q = 0;
         int i = 0;
 
-        while (i<(sizeof(n)/sizeof(int)) && n[i]!=0){
+        while (i<n.size() && n[i]!=0){
             q++;
             i++;
         }
-        cout<<q;
-        cout<<"\n";
-        cout << (sizeof(n)/sizeof(int));
-        cout<<"\n";
         i++;
         int r = 0;
-        for (int p =(sizeof(n)/sizeof(int))-1; p>=i; p--){
-            r= r + pow(2,-1*(p+1-(sizeof(n)/sizeof(int))))*n[p];
+        for (int p =n.size()-1; p>=i; p--){
+            r= r + pow(2,-1*(p+1-n.size()))*n[p];
         }
-        cout<<r;
-        cout<<"\n";
         int num = r+q*this->m;
-
         if (num%2==0)
-            num =(-2*num);
-        else if (n>0)
-            num = 2*num-1;
-        cout << num;
-        cout << "\n";
+            num =(num/-2);
+        else
+            num = (num+1)/2;
         return num;
     }
 

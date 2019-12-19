@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "Golomb.h"
 using namespace std;
 
@@ -12,10 +13,11 @@ int main() {
     golomb.encode(4);
     golomb.encode(5);
     golomb.encode(6);
-    golomb.encode(-20);
+    golomb.encode(7);
 
-    int v []= {1,1,0,0,0,1};
-    golomb.decode(v);
+    vector<int> v= {1,0,0,1,0}; //Numero 4
+    cout << golomb.decode(v) << '\n';
+
 
 
 }
