@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <fstream> 
+#include <math.h>
 using namespace std;
 
 class Bitstream
@@ -98,19 +99,34 @@ public:
         cout << "Escrita de bits finalizada.\n";
     }
 
-    int* readBits(int n){
+    int readBits(int n){
 
 
-        int * arr = new int [n];
+        /*int * arr = new int [n];
 
         for (int i=0; i<n; i++){
             arr[i] =  this->readBit();
         }
 
-        return arr;
+        return arr;*/
+
+        int num = 0;
+        for (int i = n-1; i>= 0; i--){
+
+            int bit = this->readBit();
+            
+            int val = bit << i & (int)pow(2,i);
+            num += val;
+        }
+        return num;
     }
 
-
+    void writeBits(int n, int nbits){
+        
+        for (int i = nbits-1; i >= 0; i--){
+            this->writeBit( n >> i & 1);
+        }
+    }
 
 
 };
