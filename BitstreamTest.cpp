@@ -27,10 +27,11 @@ int main() {
     Bitstream bitstream("bitTest.txt", "read");
     bitstream.writeBit(1);
     cout << bitstream.readBit();
-    int * arr = bitstream.readBits(7);
+    /*int * arr = bitstream.readBits(7);
     for (int n=0;n<7; n++){
         cout << arr[n];    
-    }
+    }*/
+    cout << bitstream.readBits(7);
     cout << bitstream.readBit();
     cout << bitstream.readBit();
     cout << bitstream.readBit();

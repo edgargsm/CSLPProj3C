@@ -83,7 +83,7 @@ public:
         this->bitstream->writeBits(r,this->b);
     }
 
-    int decode(vector<int> n){
+    int decode(){
         /*int q = 0;
         int i = 0;
 

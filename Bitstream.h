@@ -39,6 +39,7 @@ public:
     
     ~Bitstream();
 
+
     int readBit(){
         if (this->access.compare("read")!=0){
             cout << "Não foi possivel ler o bit porque o acesso ao ficheiro foi de escrita\n";
@@ -64,6 +65,7 @@ public:
 
         return bit;
     }
+
 
     void writeBit(int bit){
         if (this->access.compare("write")!=0){
