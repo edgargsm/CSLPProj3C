@@ -22,6 +22,7 @@ int main() {
     bitstream1.writeBit(0);
     bitstream1.writeBit(1);
     bitstream1.writeBit(0);
+    bitstream1.writeBits(2,2);
     bitstream1.endWrite();
 
     Bitstream bitstream("bitTest.txt", "read");
@@ -32,6 +33,7 @@ int main() {
         cout << arr[n];    
     }*/
     cout << bitstream.readBits(7);
+    cout << "\n";
     cout << bitstream.readBit();
     cout << bitstream.readBit();
     cout << bitstream.readBit();

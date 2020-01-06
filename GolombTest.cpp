@@ -3,7 +3,7 @@
 #include "Golomb.h"
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
     /*
     Golomb golomb(5);
 
@@ -22,7 +22,7 @@ int main() {
     Bitstream bitstream1("bitTest.txt", "write");
     Golomb g(5, &bitstream1);
 
-    g.encode(10);
+    g.encode(std::stoi(argv[1]));
     bitstream1.endWrite();
 
 
